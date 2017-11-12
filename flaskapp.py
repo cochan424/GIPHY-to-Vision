@@ -13,10 +13,9 @@ def main():
     print("EMOTIONAL STRING: " + emot_str)
     #giphy(emot_str)
     
-    quote = giphy(emot_str)[0]
-    bitly = giphy(emot_str)[1]
-    
- 
+    quote, bitly = giphy(emot_str)
+    print("QUOTE " + quote)   
+    print("BITLY " + bitly)
     return render_template(
         'hello.html',**locals())
 
@@ -102,12 +101,13 @@ def giphy(emotion_str):
         links = []
         index = 0
         while index < len(api_response.data):
-            links += [api_response.data[index].embed_url, api_response.data[index].bitly_url]
+            links.append((api_response.data[index].embed_url,api_response.data[index].bitly_url))
             index += 1
         
-        print(links[random.randint(0, limit-1)]) # gives a random link with the corresponding emotion query
-        webbrowser.open(links[random.randint(0, limit-1)])
-        return(links[random.randint(0, limit-1)])
+        rand_tuple = links[random.randint(0, limit-1)]
+        print() # gives a random link with the corresponding emotion query
+        #webbrowser.open(rand_tuple[0])
+        return(rand_tuple)
 
     except ApiException as e:
         print("Exception when calling DefaultApi->gifs_search_get: %s\n" % e)

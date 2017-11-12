@@ -20,7 +20,7 @@ fmt = 'json' # str | Used to indicate the expected response format. Default is J
 try: 
     # Search Endpoint
     api_response = api_instance.gifs_search_get(api_key, q, limit=limit, offset=offset, rating=rating, lang=lang, fmt=fmt)
-    pprint(api_response)
+    #pprint(api_response)
 
     links = []
     index = 0
@@ -30,7 +30,7 @@ try:
     # print (links)
     # print(random.randint(1, limit))
     print(links[random.randint(0, limit-1)]) # gives a random link with the corresponding emotion query
-    #webbrowser.open(links[random.randint(0, limit-1)])
+    webbrowser.open(links[random.randint(0, limit-1)])
     #pprint(api_response.__getitem__('data'))
     #print(api_response.data[0].embed_url)
 
